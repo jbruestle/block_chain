@@ -1,21 +1,7 @@
 
 #pragma once
 
-#include <cstddef>
-#include <memory>
-#include <algorithm>
-
-class writable
-{
-public:
-	virtual void write(const char* buf, size_t len) = 0;
-};
-
-class readable 
-{
-public:
-	virtual void read(char* buf, size_t len) = 0;
-};
+#include "io.h"
 
 template<class Policy>
 class bnode 
@@ -25,8 +11,8 @@ public:
 	const static size_t max_size = Policy::max_size;
 	typedef typename Policy::key_t key_t;
 	typedef typename Policy::value_t value_t;
-	typedef typename std::shared_ptr<const bnode> ptr_t;
-	typedef typename std::shared_ptr<bnode> wptr_t;
+	typedef shared_ptr<const bnode> ptr_t;
+	typedef shared_ptr<bnode> wptr_t;
 
 	// Create a new 'tree' with one element
 	bnode(const key_t& k, const value_t& v)
@@ -70,7 +56,7 @@ public:
 				Policy::deserialize(in, m_keys[i], m_vals[i]);
 				continue;
 			}
-			wptr_t ptr = std::make_shared<bnode>(m_size);
+			wptr_t ptr = make_shared<bnode>(m_size);
 			ptr->deserialize(in, height - 1);
 			m_keys[i] = ptr->m_keys[0];
 			m_vals[i] = ptr->m_total;
@@ -83,7 +69,7 @@ public:
 	wptr_t copy() const
 	{
 		// Make a copy of a node	
-		wptr_t copy = std::make_shared<bnode>(m_size);
+		wptr_t copy = make_shared<bnode>(m_size);
 		copy->m_total = m_total;
 		for(size_t i = 0; i < m_size; i++)
 		{
@@ -306,7 +292,7 @@ private:
 		int keep_size = m_size / 2;
 
 		// Create a new bnode with the same height as me
-		wptr_t r = std::make_shared<bnode>(m_size - keep_size);
+		wptr_t r = make_shared<bnode>(m_size - keep_size);
 
 		// Copy second of the entries into the new node
 		for(size_t i = 0; i < m_size - keep_size; i++)

@@ -1,8 +1,8 @@
 
 #include "merkle_cow.h"
+#include <arpa/inet.h>
 #pragma clang diagnostic ignored "-Wdeprecated-declarations"
 #include <openssl/sha.h>
-#include <arpa/inet.h>
 
 static void hash_kvp(hash_t& out, const merkle_cow::key_type& key, const merkle_cow::mapped_type& value)
 {

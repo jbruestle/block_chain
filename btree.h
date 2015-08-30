@@ -31,7 +31,7 @@ public:
 			if (!changed || !exists)
 				return false;
 			// Otherwise, create the initial node
-			m_root = std::make_shared<node_t>(k, v);
+			m_root = make_shared<node_t>(k, v);
 			m_height++;
 			m_size++;
 			return true;
@@ -59,7 +59,7 @@ public:
 		else if (r == node_t::ur_split)
 		{
 			// Root just split, make new root
-			m_root = std::make_shared<node_t>(w_root, overflow);
+			m_root = make_shared<node_t>(w_root, overflow);
 			m_height++;  
 			m_size++;
 		} 

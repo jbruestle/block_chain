@@ -1,11 +1,11 @@
 
 
 // Helper to 'printf' to strings
-std::string printstring(const char* format, ...);
+string printstring(const char* format, ...);
 // Makes a posibly binary string safe for logging
-std::string cleanify(const std::string& input);
+string cleanify(const string& input);
 // Does inline hex dumps
-std::string hexify(const std::string& input);
+string hexify(const string& input);
 // Does long form hex dumps
-std::string hexdump(const std::string& input);
+string hexdump(const string& input);
 

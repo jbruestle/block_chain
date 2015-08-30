@@ -1,16 +1,16 @@
 
+#include "types.h"
 #include <sstream>
 #include <iomanip>
-#include <cstdarg>
 
-std::string printstring(const char* format, ...)
+string printstring(const char* format, ...)
 {
         va_list vl;
         va_start(vl, format);
         
         char* buf;
         int len = vasprintf(&buf, format, vl);
-        std::string r(buf, len);
+        string r(buf, len);
         free(buf);
         va_end(vl);
 
@@ -19,8 +19,8 @@ std::string printstring(const char* format, ...)
 
 static const char* digits = "0123456789ABCDEF";
 
-std::string cleanify(const std::string& input) {
-	std::string out = input;
+string cleanify(const string& input) {
+	string out = input;
 	for(char& c : out) {
 		if (c < 32 || c > 127) {
 			c = '.';
@@ -29,8 +29,8 @@ std::string cleanify(const std::string& input) {
 	return out;
 }
 
-std::string hexify(const std::string& input) {
-	std::string out;
+string hexify(const string& input) {
+	string out;
 	for(uint8_t c : input) {
 		out += digits[c >> 4];
 		out += digits[c & 0xf];
@@ -39,7 +39,7 @@ std::string hexify(const std::string& input) {
 }
 
 // TODO: Where did I get this hexdump?
-std::string hexdump(const std::string& input)
+string hexdump(const string& input)
 {
 	 std::istringstream is(input);
 	 std::stringstream ss;

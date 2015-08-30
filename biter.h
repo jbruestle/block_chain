@@ -2,8 +2,6 @@
 #pragma once
 
 #include "bnode.h"
-#include <vector>
-#include <assert.h>
 
 template<class Policy>
 class biter
@@ -205,9 +203,9 @@ private:
 	// The nodes in the tree
 	// nodes[0] = root
 	// nodes[i+1] = nodes[i]->ptr(iters[i])
-	std::vector<ptr_t> m_nodes;
+	vector<ptr_t> m_nodes;
 	// The iterators within each node
-	std::vector<size_t> m_iters; 
+	vector<size_t> m_iters; 
 };
 
 
