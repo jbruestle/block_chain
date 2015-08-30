@@ -1,6 +1,21 @@
 
 #include <sstream>
 #include <iomanip>
+#include <cstdarg>
+
+std::string printstring(const char* format, ...)
+{
+        va_list vl;
+        va_start(vl, format);
+        
+        char* buf;
+        int len = vasprintf(&buf, format, vl);
+        std::string r(buf, len);
+        free(buf);
+        va_end(vl);
+
+        return r;
+}
 
 static const char* digits = "0123456789ABCDEF";
 
